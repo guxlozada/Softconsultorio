@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+  xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:ui="http://java.sun.com/jsf/facelets"
+  xmlns:a4j="http://richfaces.org/a4j" xmlns:rich="http://richfaces.org/rich">
+<h:head>
+  <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+  <h:outputStylesheet library="css" name="estilos.css" />
+  <title>Consultorio M&eacute;dico</title>
+</h:head>
+<h:body>
+  <a4j:status name="procesando" onstart="#{rich:component('mopStatus')}.show();"
+    onstop="#{rich:component('mopStatus')}.hide();" />
+  <div id="seccionMenu"
+    style="width: 180px; height: 100vh; position: fixed; background-color: #EEE; padding: 70px 10px 0px 10px;">
+    <h:form id="frmMenu" style="padding:0">
+      <fieldset>
+        <legend>Regresar a:</legend>
+        <h:panelGrid columns="1" style="font-size: 13px !important;" cellspacing="5" cellpadding="0">
+          <h:commandLink value="Inicio" actionListener="#{cacheBean.navegar}" action="#{cacheBean.salir}"
+            immediate="true">
+            <f:attribute name="nivel" value="inicio" />
+          </h:commandLink>
+          <a4j:commandLink value="Historia Cl&iacute;nica de #{cacheBean.historiaActual.nombresApellidos}"
+            actionListener="#{cacheBean.navegar}" action="historiaClinica" execute="@this" immediate="true"
+            rendered="#{not empty cacheBean.historiaActual}">
+            <f:attribute name="nivel" value="historiaClinica" />
+          </a4j:commandLink>
+          <a4j:commandLink value="Consulta M&eacute;dica Nro. #{cacheBean.consultaActual.pkFormateado}"
+            actionListener="#{cacheBean.navegar}" action="consultaMedica" execute="@this" immediate="true"
+            rendered="#{not empty cacheBean.consultaActual}">
+            <f:attribute name="nivel" value="consultaMedica" />
+          </a4j:commandLink>
+        </h:panelGrid>
+      </fieldset>
+      <c:if test="#{cacheBean.nivel eq 'inicio'}">
+        <fieldset>
+          <legend>Historias Cl&iacute;nicas</legend>
+          <h:panelGrid columns="1" style="font-size: 13px !important;" cellspacing="5" cellpadding="0">
+            <a4j:commandLink value="Nueva Historia" actionListener="#{cacheBean.navegar}" action="historiaClinica"
+              execute="@this" immediate="true">
+              <f:attribute name="nivel" value="inicio" />
+              <f:attribute name="pkHistoria" value="0" />
+            </a4j:commandLink>
+          </h:panelGrid>
+        </fieldset>
+      </c:if>
+      <c:if test="false">
+        <br />
+        <br />
+        <br />
+        <fieldset>
+          <legend>
+            <div style="color: #C00;">Cerrar sesi&oacute;n de trabajo</div>
+          </legend>
+          <a4j:commandLink value="Salir" actionListener="#{cacheBean.navegar}" action="#{cacheBean.salir}"
+            immediate="true">
+            <f:attribute name="nivel" value="inicio" />
+          </a4j:commandLink>
+        </fieldset>
+      </c:if>
+    </h:form>
+  </div>
+  <div id="seccionCabecera"
+    style="min-width: 100%; min-height: 30px; background-color: #4A75B5; padding: 7px; color: #FFF; position: fixed;">
+    <div style="font-size: 16px; font-weight: bold;">DR. HIP&Oacute;LITO LOZADA</div>
+    <div style="font-size: 12px;">&nbsp;&nbsp;Ginec&oacute;logo-Obstetra</div>
+  </div>
+  <div id="seccionContenido"
+    style="min-width: 700px; float: left; background-color: #FFF; padding: 55px 10px 10px 205px">
+    <h:form>
+      <ui:insert name="contenido">Contenido</ui:insert>
+      <a4j:poll interval="120000" execute="@this" render="frmMenu botones hidden" immediate="true" />
+      <h:inputText id="hidden" value="#{fechaActual}" />
+    </h:form>
+  </div>
+  <ui:include src="statusPopup.xhtml" />
+  <ui:include src="mensajes.xhtml" />
+</h:body>
+</html>

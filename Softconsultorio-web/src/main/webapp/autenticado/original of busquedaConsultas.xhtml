@@ -1,0 +1,71 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:c="http://java.sun.com/jsp/jstl/core"
+  xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+  xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:a4j="http://richfaces.org/a4j"
+  xmlns:rich="http://richfaces.org/rich" template="/plantilla.xhtml">
+  <ui:define name="titulo">B&uacute;queda de Consultas M&eacute;dicas</ui:define>
+  <ui:define name="contenido">
+    <rich:panel header="B&uacute;queda de Consultas M&eacute;dicas" style="width:100%">
+      <h:panelGrid columns="1" cellspacing="0" cellpadding="5">
+        <h:panelGroup id="filtro">
+          <fieldset>
+            <legend>Paciente</legend>
+            <table class="formulario" cellspacing="0">
+              <tr>
+                <th>Nombre:</th>
+                <td style="width: 220px"><h:inputText value="#{cacheBean.historiaActual.nombresApellidos}"
+                    style="width: 200px" readonly="true" /></td>
+                <th>Edad:</th>
+                <td><h:inputText value="#{cacheBean.historiaActual.edad}" style="width: 110px;text-align:right"
+                    readonly="true" /></td>
+              </tr>
+            </table>
+          </fieldset>
+        </h:panelGroup>
+        <rich:extendedDataTable id="consultas" value="#{busquedaConsultaBean.consultas}" var="consulta" rows="10"
+          noDataLabel="No existen Consultas M&eacute;dicas registradas para la paciente.">
+          <f:facet name="header">CONSULTAS MEDICAS DE LA PACIENTE</f:facet>
+          <rich:column width="70px">
+            <f:facet name="header">Nro.</f:facet>
+            <a4j:commandLink value="#{consulta.pkFormateado}" actionListener="#{cacheBean.navegar}"
+              action="consultaMedica" status="procesando">
+              <f:attribute name="nivel" value="consultaMedica" />
+              <f:attribute name="pkConsulta" value="#{consulta.pk}" />
+            </a4j:commandLink>
+          </rich:column>
+          <rich:column width="130px">
+            <f:facet name="header">Fecha de Consulta</f:facet>
+            <h:outputText value="#{consulta.fechaConsulta}">
+              <f:convertDateTime pattern="dd/MM/yyyy hh:mm" />
+            </h:outputText>
+          </rich:column>
+          <rich:column width="100px">
+            <f:facet name="header">TIpo de Eco</f:facet>
+            <h:outputText value="No registrado" rendered="#{empty consulta.tipoEco}" />
+            <a4j:commandLink value="Eco Obst&eacute;trico" actionListener="#{cacheBean.navegar}" action="ecoObstetrico"
+              rendered="#{not empty consulta.ecoObstetrico}" status="procesando">
+              <f:attribute name="nivel" value="eco" />
+              <f:attribute name="pkConsulta" value="#{consulta.pk}" />
+              <f:attribute name="eco" value="#{consulta.ecoObstetrico}" />
+            </a4j:commandLink>
+            <a4j:commandLink value="Eco P&eacute;lvico" actionListener="#{cacheBean.navegar}" action="ecoPelvico"
+              rendered="#{not empty consulta.ecoPelvico}" status="procesando">
+              <f:attribute name="nivel" value="consultaMedica" />
+              <f:attribute name="pkConsulta" value="#{consulta.pk}" />
+              <f:attribute name="eco" value="#{consulta.ecoPelvico}" />
+            </a4j:commandLink>
+          </rich:column>
+          <rich:column width="500px">
+            <f:facet name="header">Motivo de la Consulta</f:facet>
+          #{empty consulta.motivoConsulta?'No registrado':consulta.motivoConsulta}
+        </rich:column>
+          <f:facet name="footer">
+            <rich:dataScroller for="consultas" maxPages="5" />
+          </f:facet>
+        </rich:extendedDataTable>
+      </h:panelGrid>
+    </rich:panel>
+
+  </ui:define>
+</ui:composition>

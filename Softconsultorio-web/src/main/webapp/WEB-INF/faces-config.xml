@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<faces-config version="2.0" xmlns="http://java.sun.com/xml/ns/javaee"
+ xmlns:xi="http://www.w3.org/2001/XInclude"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd">
+ <managed-bean>
+  <description>Utilizado para obtener la fecha/hora actual para que el componente para visualizar imagenes solucione un bug que no refresca el contenido en peticiones ajax.</description>
+  <managed-bean-name>fechaActual</managed-bean-name>
+  <managed-bean-class>java.util.Date</managed-bean-class>
+  <managed-bean-scope>request</managed-bean-scope>
+ </managed-bean>
+ <navigation-rule>
+  <from-view-id>*</from-view-id>
+  <navigation-case>
+   <from-outcome>inicio</from-outcome>
+   <to-view-id>/index.xhtml</to-view-id>
+   <redirect/>
+  </navigation-case>
+  <navigation-case>
+   <from-outcome>salir</from-outcome>
+   <to-view-id>/index_respaldo.xhtml</to-view-id>
+   <redirect/>
+  </navigation-case>
+  <navigation-case>
+   <from-outcome>busquedaHistorias</from-outcome>
+   <to-view-id>/autenticado/busquedaHistorias.xhtml</to-view-id>
+   <redirect/>
+  </navigation-case>
+  <navigation-case>
+   <from-outcome>busquedaConsultas</from-outcome>
+   <to-view-id>/autenticado/busquedaConsultas.xhtml</to-view-id>
+   <redirect/>
+  </navigation-case>
+  <navigation-case>
+   <from-outcome>historiaClinica</from-outcome>
+   <to-view-id>/autenticado/historiaClinica.xhtml</to-view-id>
+   <redirect/>
+  </navigation-case>
+  <navigation-case>
+   <from-outcome>consultaMedica</from-outcome>
+   <to-view-id>/autenticado/consultaMedica.xhtml</to-view-id>
+   <redirect/>
+  </navigation-case>
+  <navigation-case>
+   <from-outcome>ecoPelvico</from-outcome>
+   <to-view-id>/autenticado/ecoPelvico.xhtml</to-view-id>
+   <redirect/>
+  </navigation-case>
+  <navigation-case>
+   <from-outcome>ecoObstetrico</from-outcome>
+   <to-view-id>/autenticado/ecoObstetrico.xhtml</to-view-id>
+   <redirect/>
+  </navigation-case>
+ </navigation-rule>
+</faces-config>

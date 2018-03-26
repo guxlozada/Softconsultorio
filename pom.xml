@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<artifactId>Softconsultorio</artifactId>
+	<groupId>com.eqsoft</groupId>
+	<version>1.0</version>
+	<packaging>pom</packaging>
+	<name>Softconsultorio</name>
+	<modules>
+		<module>Softconsultorio-ear</module>
+		<module>Softconsultorio-web</module>
+		<module>Softconsultorio-ejb</module>
+	</modules>
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<maven.compiler.source>1.7</maven.compiler.source>
+		<maven.compiler.target>1.7</maven.compiler.target>
+		<javaee-api.version>7.0</javaee-api.version>
+		<commons-lang3.version>3.1</commons-lang3.version>
+		<project.skipTest>true</project.skipTest>
+	</properties>
+</project>

@@ -1,0 +1,149 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html"
+  xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets"
+  xmlns:a4j="http://richfaces.org/a4j" xmlns:rich="http://richfaces.org/rich" template="/plantilla.xhtml">
+  <ui:define name="titulo">Registro de Paciente</ui:define>
+  <ui:define name="contenido">
+    <rich:panel
+      header="Historia Cl&iacute;nica Nro. #{historiaClinicaBean.nuevo?'NUEVO': historiaClinicaBean.actual.pkFormateado}"
+      style="width:100%">
+      <fieldset>
+        <table class="formulario" border="0">
+          <tr>
+            <th><h:outputLabel for="nombresApellidos" value="Nombres y Apellidos" />:</th>
+            <td colspan="3"><h:inputText id="nombresApellidos"
+                value="#{historiaClinicaBean.actual.nombresApellidos}" style="width:370px" required="true" /></td>
+            <th>Fecha de Registro:</th>
+            <td><h:inputText value="#{historiaClinicaBean.actual.fechaRegistro}"
+                style="width:110px;text-align: right;" readonly="true" tabindex="-1">
+                <f:convertDateTime pattern="dd/MM/yyyy" timeZone="#{cacheBean.timeZone}" locale="es" />
+              </h:inputText></td>
+          </tr>
+          <tr>
+            <th>Tel&eacute;fono:</th>
+            <td style="width: 130px"><h:inputText value="#{historiaClinicaBean.actual.telefono1}"
+                style="width:100px" /></td>
+            <th style="width: 130px">Celular:</th>
+            <td style="width: 130px"><h:inputText value="#{historiaClinicaBean.actual.celular}" style="width:100px" /></td>
+            <th style="width: 110px">Identificaci&oacute;n:</th>
+            <td><h:inputText value="#{historiaClinicaBean.actual.identificacion}" style="width:110px" /></td>
+          </tr>
+          <tr>
+            <th>Direcci&oacute;n:</th>
+            <td colspan="3"><h:inputTextarea value="#{historiaClinicaBean.actual.direccion}" rows="2"
+                style="width:370px" /></td>
+            <th>Estado Civil:</th>
+            <td><rich:select value="#{historiaClinicaBean.actual.estadoCivil}" enableManualInput="true"
+                style="width:100px">
+                <f:selectItem itemValue="#{null}" itemLabel="" />
+                <f:selectItem itemValue="Soltera" itemLabel="Soltera" />
+                <f:selectItem itemValue="Casada" itemLabel="Casada" />
+                <f:selectItem itemValue="UnionLibre" itemLabel="Uni&oacute;n libre" />
+                <f:selectItem itemValue="Divorciada" itemLabel="Divorciada" />
+                <f:selectItem itemValue="Viuda" itemLabel="Viuda" />
+              </rich:select></td>
+          </tr>
+          <tr>
+            <th>Tipo de Sangre:</th>
+            <td><rich:select value="#{historiaClinicaBean.actual.grupoSanguineo}" defaultLabel="Grupo"
+                enableManualInput="true" style="width:50px">
+                <f:selectItem itemValue="#{null}" itemLabel="" />
+                <f:selectItem itemValue="A" itemLabel="A" />
+                <f:selectItem itemValue="B" itemLabel="B" />
+                <f:selectItem itemValue="AB" itemLabel="AB" />
+                <f:selectItem itemValue="O" itemLabel="O" />
+              </rich:select> <rich:select value="#{historiaClinicaBean.actual.factorRH}" defaultLabel="Factor"
+                enableManualInput="true" style="width:50px">
+                <f:selectItem itemValue="#{null}" itemLabel="" />
+                <f:selectItem itemValue="+" itemLabel="RH +" />
+                <f:selectItem itemValue="-" itemLabel="RH -" />
+              </rich:select></td>
+            <th><h:outputLabel for="nombresApellidos" value="Fecha de Nacimiento" />:</th>
+            <td><rich:calendar id="fechaNacimiento" value="#{historiaClinicaBean.actual.fechaNacimiento}"
+                popup="true" datePattern="dd/MM/yyyy" inputStyle="width:80px" enableManualInput="true" required="true"
+                timeZone="#{cacheBean.timeZone}" locale="es">
+                <f:ajax render="intEdad" execute="@this" event="change" />
+                <f:ajax render="intEdad" execute="@this" event="dateselect" />
+                <f:ajax render="intEdad" execute="@this" event="inputchange" />
+              </rich:calendar></td>
+            <th>Edad:</th>
+            <td><h:inputText id="intEdad" value="#{historiaClinicaBean.actual.edad}"
+                style="width:110px;text-align: right;" readonly="true" tabindex="-1" /></td>
+          </tr>
+          <tr>
+            <th>Ciclos:</th>
+            <td><h:inputText value="#{historiaClinicaBean.actual.ciclos}" style="width:100px" /></td>
+            <th>Menarquia:</th>
+            <td colspan="3"><rich:inputNumberSpinner value="#{historiaClinicaBean.actual.menarquia}" inputSize="2"
+                minValue="0" /> <h:outputText value=" Años" styleClass="unidad" /></td>
+          </tr>
+          <tr>
+            <th># Gestas:</th>
+            <td><rich:inputNumberSpinner value="#{historiaClinicaBean.actual.gestas}" inputSize="2" minValue="0" /></td>
+            <th># Partos:</th>
+            <td><rich:inputNumberSpinner value="#{historiaClinicaBean.actual.partos}" inputSize="2" minValue="0" /></td>
+            <th># Abortos:</th>
+            <td><rich:inputNumberSpinner value="#{historiaClinicaBean.actual.abortos}" inputSize="2" minValue="0" /></td>
+          </tr>
+          <tr>
+            <th># Cesareas:</th>
+            <td><rich:inputNumberSpinner value="#{historiaClinicaBean.actual.cesareas}" inputSize="2" minValue="0" /></td>
+            <th># Hijos Vivos:</th>
+            <td><rich:inputNumberSpinner value="#{historiaClinicaBean.actual.hijosVivos}" inputSize="2"
+                minValue="0" /></td>
+            <th># Hijos Muertos:</th>
+            <td><rich:inputNumberSpinner value="#{historiaClinicaBean.actual.hijosMuertos}" inputSize="2"
+                minValue="0" /></td>
+          </tr>
+          <tr>
+            <th>APP:</th>
+            <td colspan="5"><h:inputTextarea value="#{historiaClinicaBean.actual.app}" rows="3" style="width:630px" /></td>
+          </tr>
+          <tr>
+            <th>APF:</th>
+            <td colspan="5"><h:inputTextarea value="#{historiaClinicaBean.actual.apf}" rows="3" style="width:630px" /></td>
+          </tr>
+          <tr>
+            <th>Alergias:</th>
+            <td colspan="5"><h:inputTextarea value="#{historiaClinicaBean.actual.alergias}" rows="3"
+                style="width:630px" /></td>
+          </tr>
+          <tr>
+            <th>MPF:</th>
+            <td colspan="5"><h:inputTextarea value="#{historiaClinicaBean.actual.mpf}" rows="3" style="width:630px" /></td>
+          </tr>
+          <tr>
+            <th>Pap Test:</th>
+            <td colspan="5"><h:inputTextarea value="#{historiaClinicaBean.actual.papTest}" rows="3"
+                style="width:630px" /></td>
+          </tr>
+        </table>
+      </fieldset>
+      <h:panelGroup id="botones">
+        <table class="formulario" cellpadding="3" border="0">
+          <tr>
+            <td style="width: 150px"><a4j:commandButton value="Guardar Informaci&oacute;n"
+                actionListener="#{historiaClinicaBean.guardar}" render="@form frmMenu" status="procesando" /></td>
+            <td style="width: 90px"><a4j:commandButton value="Cancelar"
+                actionListener="#{historiaClinicaBean.cancelar}" execute="@this" immediate="true" render="@form"
+                status="procesando" /></td>
+            <th style="width: 340px"><a4j:commandButton value="Hist&oacute;rico de Consultas"
+                actionListener="#{cacheBean.navegar}" disabled="#{historiaClinicaBean.nuevo}" action="busquedaConsultas"
+                immediate="true" status="procesando">
+                <f:attribute name="nivel" value="historiaClinica" />
+                <f:attribute name="pkHistoria" value="#{historiaClinicaBean.actual.pk}" />
+              </a4j:commandButton></th>
+            <th style="width: 165px"><a4j:commandButton value="Nueva Consulta M&eacute;dica"
+                actionListener="#{cacheBean.navegar}" disabled="#{historiaClinicaBean.nuevo}" action="consultaMedica"
+                immediate="true" status="procesando">
+                <f:attribute name="nivel" value="historiaClinica" />
+                <f:attribute name="pkHistoria" value="#{historiaClinicaBean.actual.pk}" />
+              </a4j:commandButton></th>
+          </tr>
+        </table>
+      </h:panelGroup>
+    </rich:panel>
+
+  </ui:define>
+</ui:composition>

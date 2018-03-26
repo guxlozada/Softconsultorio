@@ -1,0 +1,72 @@
+html,body {
+	margin: 0px;
+	padding: 0px;
+	height: 100%;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px
+}
+
+table.formulario {
+	font-size: 12px !important;
+}
+
+table.formulario th {
+	font-weight: bold;
+	white-space: nowrap;
+	text-align: right;
+	white-space: nowrap;
+}
+
+input[readonly] {
+	background-image: none !important;
+	background-color: #DDD !important;
+}
+
+legend,a {
+	font-size: 12px !important;
+}
+
+textarea,input[type="text"],input[type="password"],select {
+	font-size: 12px !important;
+}
+
+input.rf-sel-inp,input.rf-insp-inp[type="text"] {
+	height: 19px !important;
+}
+
+.rf-p-hdr {
+	padding: 6px !important;
+	font-size: 13px !important;
+}
+.rf-edt-c-cnt{
+	font-size: 12px !important;
+}
+
+.rf-insp {
+	display: inline-flex !important
+}
+
+fieldset {
+	padding: 5px !important;
+}
+
+legend {
+	font-weight: bold;
+	color: #FF7800 !important;
+}
+
+.unidad {
+	font-weight: bold;
+	font-size: 10px !important
+}
+
+.ntfInfo *.rf-ntf-cnt {
+	width: 500px !important;
+	background-color: #CCFFCC !important;
+	font-size: 12px !important
+}
+
+input[type="submit"] {
+	padding: 3px 15px !important;
+	font-weight: bold !important;
+}

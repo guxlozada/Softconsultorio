@@ -1,0 +1,66 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html"
+  xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets"
+  xmlns:a4j="http://richfaces.org/a4j" xmlns:rich="http://richfaces.org/rich" template="/plantilla.xhtml">
+  <ui:define name="titulo">B&uacute;queda de Historia Cl&iacute;nica</ui:define>
+  <ui:define name="contenido">
+    <rich:panel header="B&uacute;queda de Historias Cl&iacute;nicas" style="width:100%">
+      <h:panelGrid columns="1" cellspacing="0" cellpadding="5">
+        <h:panelGroup id="filtro">
+          <fieldset>
+            <legend>Filtro</legend>
+            <table class="formulario" cellspacing="0">
+              <tr>
+                <th>Nombre:</th>
+                <td style="width: 220px"><h:inputText value="#{busquedaHistoriaBean.filtroNombre}"
+                    style="width: 200px" /></td>
+                <th>Identificaci&oacute;n:</th>
+                <td style="width: 120px"><h:inputText value="#{busquedaHistoriaBean.filtroIdentificacion}"
+                    style="width: 100px" /></td>
+                <td><a4j:commandButton value="Buscar" actionListener="#{busquedaHistoriaBean.buscar}"
+                    execute="filtro" render="historias" status="procesando" /></td>
+              </tr>
+            </table>
+          </fieldset>
+        </h:panelGroup>
+        <rich:extendedDataTable id="historias" value="#{busquedaHistoriaBean.historias}" var="Historia" rows="10"
+          noDataLabel="No existen Historias Cl&iacute;nicas; ingrese un nombre y/o identificaci&oacute; de una paciente y de click en el boton Buscar.">
+          <f:facet name="header">HISTORIAS CLINICAS</f:facet>
+          <rich:column width="250px">
+            <f:facet name="header">Nombre del Paciente</f:facet>
+            <a4j:commandLink value="#{Historia.nombresApellidos}" actionListener="#{cacheBean.navegar}"
+              action="historiaClinica" status="procesando">
+              <f:attribute name="nivel" value="historiaClinica" />
+              <f:attribute name="pkHistoria" value="#{Historia.pk}" />
+            </a4j:commandLink>
+          </rich:column>
+          <rich:column width="100px">
+            <f:facet name="header">Identificaci&oacute;n</f:facet>
+            <h:outputText value="#{empty Historia.identificacion?'No registrada':Historia.identificacion}" />
+          </rich:column>
+          <rich:column width="100px">
+            <f:facet name="header">Tel&eacute;fono</f:facet>
+            <h:outputText value="#{empty Historia.telefono1?'No registrada':Historia.telefono1}" />
+          </rich:column>
+          <rich:column width="100px">
+            <f:facet name="header">Celular</f:facet>
+            <h:outputText value="#{empty Historia.celular?'No registrada':Historia.celular}" />
+          </rich:column>
+          <rich:column width="150px">
+            <a4j:commandLink value="Ver Consultas M&eacute;dicas" actionListener="#{cacheBean.navegar}"
+              action="busquedaConsultas" status="procesando">
+              <f:attribute name="nivel" value="consultaMedica" />
+              <f:attribute name="pkHistoria" value="#{Historia.pk}" />
+            </a4j:commandLink>
+          </rich:column>
+          <f:facet name="footer">
+            <rich:dataScroller for="historias" maxPages="5" fastStep="3" />
+          </f:facet>
+        </rich:extendedDataTable>
+
+      </h:panelGrid>
+    </rich:panel>
+
+  </ui:define>
+</ui:composition>

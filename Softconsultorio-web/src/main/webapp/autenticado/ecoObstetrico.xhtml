@@ -1,0 +1,115 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html"
+  xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets"
+  xmlns:a4j="http://richfaces.org/a4j" xmlns:rich="http://richfaces.org/rich" template="/plantilla.xhtml">
+  <ui:define name="titulo">Eco Obst&eacute;trico</ui:define>
+  <ui:define name="contenido">
+    <rich:panel
+      header="Informe del Eco Obst&eacute;trico Nro. #{ecoObstetricoBean.nuevo?'NUEVO':ecoObstetricoBean.actual.pkFormateado}"
+      style="width:100%">
+      <ui:include src="cabecera_consulta.xhtml" />
+      <fieldset>
+        <legend>Detalles del Eco</legend>
+        <table class="formulario" cellpadding="3" border="0">
+          <tr>
+            <th style="width: 100px"><h:outputLabel for="sg" value="SG" />:</th>
+            <td style="width: 60px"><h:inputText id="sg" value="#{ecoObstetricoBean.actual.sg}"
+                style="width:40px;text-align: right;" /> <h:outputText value=" mm" styleClass="unidad" /></td>
+            <th style="width: 10px"><h:outputText value="=" /></th>
+            <td style="width: 130px"><h:inputText id="sgSemanas" value="#{ecoObstetricoBean.actual.sgSemanas}"
+                style="width:30px;text-align: right;" /> <h:outputText value=" semanas" styleClass="unidad" /></td>
+            <th style="width: 40px"><h:outputLabel for="crl" value="CRL" />:</th>
+            <td style="width: 60px"><h:inputText id="crl" value="#{ecoObstetricoBean.actual.crl}"
+                style="width:40px;text-align: right;" /> <h:outputText value=" mm" styleClass="unidad" /></td>
+            <th style="width: 10px"><h:outputText value="=" /></th>
+            <td style="width: 130px"><h:inputText id="crlSemanas" value="#{ecoObstetricoBean.actual.crlSemanas}"
+                style="width:30px;text-align: right;" /> <h:outputText value=" semanas" styleClass="unidad" /></td>
+            <th style="width: 40px"><h:outputLabel for="tn" value="TN" />:</th>
+            <td><h:inputText id="tn" value="#{ecoObstetricoBean.actual.tn}" style="width:40px;text-align: right;" />
+              <h:outputText value=" mm" styleClass="unidad" /></td>
+          </tr>
+          <tr>
+            <th><h:outputLabel for="dbp" value="DBP" />:</th>
+            <td><h:inputText id="dbp" value="#{ecoObstetricoBean.actual.dbp}" style="width:40px;text-align: right;" />
+              <h:outputText value=" mm" styleClass="unidad" /></td>
+            <th><h:outputText value="=" /></th>
+            <td><h:inputText id="dbpSemanas" value="#{ecoObstetricoBean.actual.dbpSemanas}"
+                style="width:30px;text-align: right;" /> <h:outputText value=" semanas" styleClass="unidad" /></td>
+            <th><h:outputLabel for="lf" value="LF" />:</th>
+            <td><h:inputText id="lf" value="#{ecoObstetricoBean.actual.lf}" style="width:40px;text-align: right;" />
+              <h:outputText value=" mm" styleClass="unidad" /></td>
+            <th><h:outputText value="=" /></th>
+            <td><h:inputText id="lfSemanas" value="#{ecoObstetricoBean.actual.lfSemanas}"
+                style="width:30px;text-align: right;" /> <h:outputText value=" semanas" styleClass="unidad" /></td>
+            <th><h:outputLabel for="fcf" value="FCF" />:</th>
+            <td><h:inputText id="fcf" value="#{ecoObstetricoBean.actual.fcf}" style="width:40px;text-align: right;" />
+              <h:outputText value=" latidos x min." styleClass="unidad" /></td>
+          </tr>
+          <tr>
+            <th><h:outputLabel for="cc" value="CC" />:</th>
+            <td><h:inputText id="cc" value="#{ecoObstetricoBean.actual.cc}" style="width:40px;text-align: right;" />
+              <h:outputText value=" cm" styleClass="unidad" /></td>
+            <th><h:outputText value="=" /></th>
+            <td><h:inputText id="ccSemanas" value="#{ecoObstetricoBean.actual.ccSemanas}"
+                style="width:30px;text-align: right;" /> <h:outputText value=" semanas" styleClass="unidad" /></td>
+            <th><h:outputLabel for="ac" value="AC" />:</th>
+            <td><h:inputText id="ac" value="#{ecoObstetricoBean.actual.ac}" style="width:40px;text-align: right;" />
+              <h:outputText value=" cm" styleClass="unidad" /></td>
+            <th><h:outputText value="=" /></th>
+            <td><h:inputText id="acSemanas" value="#{ecoObstetricoBean.actual.acSemanas}"
+                style="width:30px;text-align: right;" /> <h:outputText value=" semanas" styleClass="unidad" /></td>
+            <th><h:outputLabel for="fpp" value="FPP" />:</th>
+            <td colspan="9"><rich:calendar id="fpp" value="#{ecoObstetricoBean.actual.fpp}" popup="true"
+                datePattern="dd/MM/yyyy" inputStyle="width:80px" enableManualInput="true"
+                timeZone="#{cacheBean.timeZone}" locale="es" /></td>
+          </tr>
+          <tr>
+            <th style="min-width: 100px"><h:outputLabel for="informe" value="Informe" />:</th>
+            <td colspan="9"><h:inputTextarea id="informe" value="#{ecoObstetricoBean.actual.informe}" rows="4"
+                style="width:650px" required="true"
+                requiredMessage="Se requiere que ingrese el 'Informe' del eco obst&eacute;trico." /></td>
+          </tr>
+          <tr>
+            <th>LA:</th>
+            <td colspan="9"><h:inputTextarea value="#{ecoObstetricoBean.actual.la}" rows="4" style="width:650px" /></td>
+          </tr>
+          <tr>
+            <th>Placenta:</th>
+            <td colspan="9"><h:inputTextarea value="#{ecoObstetricoBean.actual.placenta}" rows="4"
+                style="width:650px" /></td>
+          </tr>
+          <tr>
+            <th><h:outputLabel for="edadGestacional" value="Edad Gestacional" />:</th>
+            <td colspan="3"><h:inputText id="edadGestacional" value="#{ecoObstetricoBean.actual.edadGestacional}"
+                style="width: 40px;text-align: right;" /> <h:outputText value=" +/-" /> <rich:inputNumberSpinner
+                value="#{ecoObstetricoBean.actual.edadGestacionalDesvioInteger}" inputSize="1" minValue="1" maxValue="9" />
+              <h:outputText value=" semanas" styleClass="unidad" /></td>
+            <th><h:outputLabel for="peso" value="Peso" />:</th>
+            <td colspan="5"><h:inputText id="peso" value="#{ecoObstetricoBean.actual.peso}"
+                style="width: 40px;text-align: right;" /> <h:outputText value=" gramos" styleClass="unidad" /></td>
+          </tr>
+          <tr>
+            <th>Observaciones:</th>
+            <td colspan="9"><h:inputTextarea value="#{ecoObstetricoBean.actual.observaciones}" rows="2"
+                style="width:650px" /></td>
+          </tr>
+        </table>
+      </fieldset>
+      <h:panelGroup id="botones">
+        <table class="formulario" cellpadding="3" border="0">
+          <tr>
+            <td style="width: 150px"><a4j:commandButton value="Guardar Informaci&oacute;n"
+                actionListener="#{ecoObstetricoBean.guardar}" render="@form frmMenu" status="procesando" /></td>
+            <td style="width: 90px"><a4j:commandButton value="Cancelar"
+                actionListener="#{ecoObstetricoBean.cancelar}" execute="@this" immediate="true" render="@form"
+                status="procesando" /></td>
+            <th style="width: 500px"><h:commandButton value="imprimir"
+                actionListener="#{reporteBean.reporteEcoObstetricoPDF}" disabled="#{ecoObstetricoBean.nuevo}"
+                execute="@this" immediate="true" /></th>
+          </tr>
+        </table>
+      </h:panelGroup>
+    </rich:panel>
+  </ui:define>
+</ui:composition>

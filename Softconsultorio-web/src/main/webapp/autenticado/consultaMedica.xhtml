@@ -1,0 +1,105 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html"
+  xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets"
+  xmlns:a4j="http://richfaces.org/a4j" xmlns:rich="http://richfaces.org/rich" template="/plantilla.xhtml">
+  <ui:define name="titulo">Consulta M&eacute;dica</ui:define>
+  <ui:define name="contenido">
+    <rich:panel
+      header="Consulta M&eacute;dica Nro. #{consultaMedicaBean.nuevo?'NUEVO': consultaMedicaBean.actual.pkFormateado}"
+      style="min-width:800px">
+      <fieldset>
+        <legend>Paciente</legend>
+        <table class="formulario" cellspacing="0">
+          <tr>
+            <th style="width: 100px">Nombre:</th>
+            <td><h:inputText value="#{cacheBean.historiaActual.nombresApellidos}" style="width: 310px"
+                readonly="true" tabindex="-1" /></td>
+            <th style="width: 70px">Edad:</th>
+            <td><h:inputText value="#{cacheBean.historiaActual.edad}" style="width: 110px;text-align:right"
+                readonly="true" tabindex="-1" /></td>
+          </tr>
+        </table>
+      </fieldset>
+      <fieldset>
+        <legend>Detalles</legend>
+        <table class="formulario" border="0">
+          <tr>
+            <th style="width: 100px">Nro.</th>
+            <td><h:inputText value="#{consultaMedicaBean.nuevo?'NUEVO': consultaMedicaBean.actual.pkFormateado}"
+                style="width: 55px;text-align: right;" readonly="true" tabindex="-1" /></td>
+            <th>Fecha:</th>
+            <td><rich:calendar value="#{consultaMedicaBean.actual.fechaConsulta}" datePattern="dd/MM/yyyy hh:mm"
+                inputStyle="width:100px" popup="true" timeZone="#{cacheBean.timeZone}" locale="es" tabindex="-1" /></td>
+            <th>Tipo de Eco:</th>
+            <td><h:inputText
+                value="#{empty consultaMedicaBean.actual.tipoEco?'No Registrado':consultaMedicaBean.actual.tipoEco}"
+                readonly="true" style="width: 90px;" tabindex="-1" /></td>
+
+          </tr>
+          <tr>
+            <th><h:outputLabel for="peso" value="Peso" />:</th>
+            <td style="width: 110px"><h:inputText id="peso" value="#{consultaMedicaBean.actual.peso}"
+                style="width: 55px;text-align: right;">
+                <f:convertNumber integerOnly="true" />
+                <a4j:ajax event="blur" execute="@this" />
+              </h:inputText> <h:outputText value=" Libras" styleClass="unidad" /></td>
+            <th style="width: 120px"><h:outputLabel for="temperatura" value="Temperatura" />:</th>
+            <td style="width: 180px"><h:inputText id="temperatura" value="#{consultaMedicaBean.actual.temperatura}"
+                style="width: 50px;text-align: right;">
+                <f:convertNumber integerOnly="true" minFractionDigits="1" pattern="#.#" />
+              </h:inputText> <h:outputText value=" Grados Centigrados" styleClass="unidad" /></td>
+            <th style="width: 120px">Presion Arterial:</th>
+            <td><h:inputText value="#{consultaMedicaBean.actual.presionArterial}"
+                style="width:60px;text-align: right;" /> <h:outputText value=" mmHg" styleClass="unidad" /></td>
+          </tr>
+          <tr>
+            <th>Motivo Consulta:</th>
+            <td colspan="5"><h:inputTextarea value="#{consultaMedicaBean.actual.motivoConsulta}" rows="5"
+                style="width:650px" /></td>
+          </tr>
+          <tr>
+            <th>Examen Fisico:</th>
+            <td colspan="5"><h:inputTextarea value="#{consultaMedicaBean.actual.examenFisico}" rows="5"
+                style="width:650px" /></td>
+          </tr>
+          <tr>
+            <th>Diagnostico:</th>
+            <td colspan="5"><h:inputTextarea value="#{consultaMedicaBean.actual.diagnostico}" rows="5"
+                style="width:650px" /></td>
+          </tr>
+          <tr>
+            <th>Tratamiento:</th>
+            <td colspan="5"><h:inputTextarea value="#{consultaMedicaBean.actual.tratamiento}" rows="5"
+                style="width:650px" /></td>
+          </tr>
+        </table>
+      </fieldset>
+      <h:panelGroup id="botones">
+        <table class="formulario" cellpadding="3" border="0">
+          <tr>
+            <td style="width: 150px"><a4j:commandButton value="Guardar Informaci&oacute;n"
+                actionListener="#{consultaMedicaBean.guardar}" render="@form frmMenu" status="procesando" /></td>
+            <td style="width: 90px"><a4j:commandButton value="Cancelar"
+                actionListener="#{consultaMedicaBean.cancelar}" execute="@this" immediate="true" render="@form"
+                status="procesando" /></td>
+            <th style="width: 380px"><a4j:commandButton value="Eco P&eacute;lvico"
+                actionListener="#{cacheBean.navegar}"
+                disabled="#{consultaMedicaBean.nuevo or consultaMedicaBean.actual.tipoEco eq 'OBSTETRICO'}"
+                action="ecoPelvico" execute="@this" immediate="true" status="procesando">
+                <f:attribute name="nivel" value="consultaMedica" />
+                <f:attribute name="eco" value="#{consultaMedicaBean.actual.ecoPelvico}" />
+              </a4j:commandButton></th>
+            <th style="width: 120px"><a4j:commandButton value="Eco Obst&eacute;trico"
+                actionListener="#{cacheBean.navegar}"
+                disabled="#{consultaMedicaBean.nuevo or consultaMedicaBean.actual.tipoEco eq 'PELVICO'}"
+                action="ecoObstetrico" execute="@this" immediate="true" status="procesando">
+                <f:attribute name="nivel" value="consultaMedica" />
+                <f:attribute name="eco" value="#{consultaMedicaBean.actual.ecoObstetrico}" />
+              </a4j:commandButton></th>
+          </tr>
+        </table>
+      </h:panelGroup>
+    </rich:panel>
+  </ui:define>
+</ui:composition>

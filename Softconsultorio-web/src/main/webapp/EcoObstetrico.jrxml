@@ -1,0 +1,424 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="EcoObstetrico" pageWidth="612" pageHeight="792" whenNoDataType="AllSectionsNoDetail" columnWidth="472" leftMargin="70" rightMargin="70" topMargin="60" bottomMargin="10" uuid="51670079-0131-4e4f-986f-31004dd46364">
+	<property name="ireport.zoom" value="1.2418426461183112"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="407"/>
+	<style name="Normal11" isDefault="true" hAlign="Left" vAlign="Middle" fontName="SansSerif" fontSize="11" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" isPdfEmbedded="true"/>
+	<style name="Negrita13" style="Normal11" fontSize="13" isBold="true" isItalic="false" isUnderline="false"/>
+	<parameter name="FORMATO_DIA" class="java.text.DateFormat">
+		<defaultValueExpression><![CDATA[$P{REPORT_FORMAT_FACTORY}.createDateFormat("dd", $P{REPORT_LOCALE}, $P{REPORT_TIME_ZONE})]]></defaultValueExpression>
+	</parameter>
+	<parameter name="FORMATO_MES" class="java.text.DateFormat">
+		<defaultValueExpression><![CDATA[$P{REPORT_FORMAT_FACTORY}.createDateFormat("MMMM", $P{REPORT_LOCALE}, $P{REPORT_TIME_ZONE})]]></defaultValueExpression>
+	</parameter>
+	<parameter name="FORMATO_ANIO" class="java.text.DateFormat">
+		<defaultValueExpression><![CDATA[$P{REPORT_FORMAT_FACTORY}.createDateFormat("yyyy", $P{REPORT_LOCALE}, $P{REPORT_TIME_ZONE})]]></defaultValueExpression>
+	</parameter>
+	<parameter name="PACIENTE" class="com.eqsoft.mongopersistence.HistoriaClinica"/>
+	<parameter name="ECO" class="com.eqsoft.mongopersistence.EcoObstetrico"/>
+	<group name="INFORME">
+		<groupExpression><![CDATA[$P{ECO}]]></groupExpression>
+		<groupHeader>
+			<band height="662" splitType="Immediate">
+				<staticText>
+					<reportElement uuid="a242040c-3c2f-4e17-a583-00233bbdcf89" x="0" y="0" width="472" height="40"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="24"/>
+					</textElement>
+					<text><![CDATA[DR. HIPÓLITO LOZADA]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="513923db-c82f-4117-a42b-c7e6ef0157c3" x="0" y="65" width="472" height="55"/>
+					<textElement textAlignment="Center" verticalAlignment="Top">
+						<font size="10"/>
+					</textElement>
+					<text><![CDATA[Cayambe, Ascazubi N1-20  y Libertad
+Teléfonos: 0999664413 - 2360907]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="06111e48-d6d3-4403-9f2a-386bd3e96aec" x="0" y="40" width="472" height="25"/>
+					<textElement textAlignment="Center" verticalAlignment="Top">
+						<font size="16"/>
+					</textElement>
+					<text><![CDATA[Ginecólogo - Obstetra]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="9365e100-4346-4153-a774-41f88b921be9" style="Negrita13" x="0" y="120" width="65" height="20"/>
+					<textElement verticalAlignment="Top">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[Fecha:]]></text>
+				</staticText>
+				<textField isBlankWhenNull="false">
+					<reportElement uuid="aa5eb326-c130-45a1-8399-5a214994eebc" x="65" y="120" width="407" height="20"/>
+					<textElement verticalAlignment="Top"/>
+					<textFieldExpression><![CDATA[$P{FORMATO_DIA}.format($P{ECO}.getFechaEco()) + " de " + $P{FORMATO_MES}.format($P{ECO}.getFechaEco()) + " del " + $P{FORMATO_ANIO}.format($P{ECO}.getFechaEco())]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement uuid="bef9bac9-8302-42f6-b876-673abcd3a6f8" style="Negrita13" x="0" y="140" width="65" height="20"/>
+					<textElement verticalAlignment="Top">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[Paciente:]]></text>
+				</staticText>
+				<textField isBlankWhenNull="false">
+					<reportElement uuid="69e948bd-44b3-4d99-bcf7-5f82adfaf031" x="65" y="140" width="407" height="20"/>
+					<textElement verticalAlignment="Top"/>
+					<textFieldExpression><![CDATA[$P{PACIENTE}.getNombresApellidos()]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement uuid="fd9b0a4b-fe36-49e7-a3a3-11b8305e9c07" style="Negrita13" x="0" y="160" width="65" height="30"/>
+					<textElement verticalAlignment="Top">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[Edad:]]></text>
+				</staticText>
+				<textField isBlankWhenNull="false">
+					<reportElement uuid="d7a81afe-9955-44e6-8b8a-2c1a173024c2" x="65" y="160" width="407" height="30"/>
+					<textElement verticalAlignment="Top"/>
+					<textFieldExpression><![CDATA[$P{PACIENTE}.getEdad()]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="false">
+					<reportElement uuid="7cb5a4cf-e9b7-4cc2-b24c-01d607fbee2c" positionType="Float" x="0" y="190" width="472" height="25" isRemoveLineWhenBlank="true"/>
+					<box>
+						<topPen lineWidth="0.0"/>
+						<leftPen lineWidth="0.0"/>
+						<bottomPen lineWidth="0.0"/>
+						<rightPen lineWidth="0.0"/>
+					</box>
+					<textElement textAlignment="Justified" verticalAlignment="Top"/>
+					<textFieldExpression><![CDATA[$P{ECO}.getInforme()]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement uuid="ac4fa80f-4be5-4c51-b72d-4d70cec8cf41" style="Negrita13" positionType="Float" x="0" y="215" width="35" height="20" isRemoveLineWhenBlank="true">
+						<printWhenExpression><![CDATA[$P{ECO}.getSg()== null? false:true]]></printWhenExpression>
+					</reportElement>
+					<box>
+						<topPen lineWidth="0.0"/>
+						<leftPen lineWidth="0.0"/>
+						<bottomPen lineWidth="0.0"/>
+						<rightPen lineWidth="0.0"/>
+					</box>
+					<textElement textAlignment="Left" verticalAlignment="Bottom">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[SG:]]></text>
+				</staticText>
+				<textField isBlankWhenNull="false">
+					<reportElement uuid="22625973-386a-4b16-be39-9ef610863afb" positionType="Float" x="35" y="215" width="65" height="20" isRemoveLineWhenBlank="true">
+						<printWhenExpression><![CDATA[$P{ECO}.getSg()== null? false:true]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Right" verticalAlignment="Bottom"/>
+					<textFieldExpression><![CDATA[$P{ECO}.getSg()+" mm"]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="false">
+					<reportElement uuid="95d79aef-ca87-4633-ad28-7bc8600437ba" positionType="Float" x="100" y="215" width="372" height="20" isRemoveLineWhenBlank="true">
+						<printWhenExpression><![CDATA[$P{ECO}.getSg()==null?false:true]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Left" verticalAlignment="Bottom">
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[" = "+$P{ECO}.getSgSemanas()+" semanas"]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement uuid="853ba191-4466-418e-b14a-f1e4e63feedc" style="Negrita13" positionType="Float" x="0" y="235" width="35" height="20" isRemoveLineWhenBlank="true">
+						<printWhenExpression><![CDATA[$P{ECO}.getCrl()==null?false:true]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Left" verticalAlignment="Bottom">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[CRL:]]></text>
+				</staticText>
+				<textField isBlankWhenNull="false">
+					<reportElement uuid="f84c2e65-1692-436a-9f49-c441ea4a9922" positionType="Float" x="35" y="235" width="65" height="20" isRemoveLineWhenBlank="true">
+						<printWhenExpression><![CDATA[$P{ECO}.getCrl()==null?false:true]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Right" verticalAlignment="Bottom"/>
+					<textFieldExpression><![CDATA[$P{ECO}.getCrl()+" mm"]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="false">
+					<reportElement uuid="d84a7baf-a6d8-4e98-80cf-a9a912e0b865" positionType="Float" x="100" y="235" width="372" height="20" isRemoveLineWhenBlank="true">
+						<printWhenExpression><![CDATA[$P{ECO}.getCrl()==null?false:true]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Left" verticalAlignment="Bottom">
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[" = "+$P{ECO}.getCrlSemanas()+" semanas"]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement uuid="f01df30a-4b7f-4b2e-ac79-0b02caf8f933" style="Negrita13" positionType="Float" x="0" y="255" width="35" height="20" isRemoveLineWhenBlank="true">
+						<printWhenExpression><![CDATA[$P{ECO}.getFcf()==null?false:true]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Left" verticalAlignment="Bottom">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[FCF:]]></text>
+				</staticText>
+				<textField isBlankWhenNull="false">
+					<reportElement uuid="8b804c0e-90ca-4114-891d-47b909e7c086" positionType="Float" x="35" y="255" width="65" height="20" isRemoveLineWhenBlank="true">
+						<printWhenExpression><![CDATA[$P{ECO}.getFcf()==null?false:true]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Right" verticalAlignment="Bottom"/>
+					<textFieldExpression><![CDATA[$P{ECO}.getFcf()+" lpm"]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement uuid="63c0d6a7-d7c6-4330-9571-356d2b38f733" style="Negrita13" positionType="Float" x="0" y="275" width="35" height="20" isRemoveLineWhenBlank="true">
+						<printWhenExpression><![CDATA[$P{ECO}.getTn()==null?false:true]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Left" verticalAlignment="Bottom">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[TN:]]></text>
+				</staticText>
+				<textField isBlankWhenNull="false">
+					<reportElement uuid="600677c0-78e3-4eb8-9c8a-7300a6dfbbfc" positionType="Float" x="35" y="275" width="65" height="20" isRemoveLineWhenBlank="true">
+						<printWhenExpression><![CDATA[$P{ECO}.getTn()==null?false:true]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Right" verticalAlignment="Bottom"/>
+					<textFieldExpression><![CDATA[$P{ECO}.getTn()+" mm"]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement uuid="48e69d10-05a3-4a09-b436-917019c55a4a" style="Negrita13" positionType="Float" x="0" y="295" width="35" height="20" isRemoveLineWhenBlank="true">
+						<printWhenExpression><![CDATA[$P{ECO}.getDbp()==null?false:true]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Left" verticalAlignment="Bottom">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[DBP:]]></text>
+				</staticText>
+				<textField isBlankWhenNull="true">
+					<reportElement uuid="f79dd881-face-493d-8499-09eef90e45d3" positionType="Float" x="35" y="295" width="65" height="20" isRemoveLineWhenBlank="true">
+						<printWhenExpression><![CDATA[$P{ECO}.getDbp()==null?false:true]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Right" verticalAlignment="Bottom"/>
+					<textFieldExpression><![CDATA[$P{ECO}.getDbp()+" mm"]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement uuid="038e7111-8706-4a6c-9b18-d8a9193e8c59" positionType="Float" x="100" y="295" width="372" height="20" isRemoveLineWhenBlank="true">
+						<printWhenExpression><![CDATA[$P{ECO}.getDbp()==null?false:true]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Left" verticalAlignment="Bottom">
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[" = "+$P{ECO}.getDbpSemanas()+" semanas"]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement uuid="04e0a21e-4a64-4223-9b86-ba4728788fed" style="Negrita13" positionType="Float" x="0" y="315" width="35" height="20" isRemoveLineWhenBlank="true">
+						<printWhenExpression><![CDATA[$P{ECO}.getCc()==null?false:true]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Left" verticalAlignment="Bottom">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[CC:]]></text>
+				</staticText>
+				<textField isBlankWhenNull="false">
+					<reportElement uuid="1b324980-db9b-4541-b069-925ba3ef4ed2" positionType="Float" x="35" y="315" width="65" height="20" isRemoveLineWhenBlank="true">
+						<printWhenExpression><![CDATA[$P{ECO}.getCc()==null?false:true]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Right" verticalAlignment="Bottom"/>
+					<textFieldExpression><![CDATA[$P{ECO}.getCc()+" cm"]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="false">
+					<reportElement uuid="c81c6d00-2884-4b1c-835a-da4d10a4c5be" positionType="Float" x="100" y="315" width="372" height="20" isRemoveLineWhenBlank="true">
+						<printWhenExpression><![CDATA[$P{ECO}.getCc()==null?false:true]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Left" verticalAlignment="Bottom">
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[" = "+$P{ECO}.getCcSemanas()+" semanas"]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement uuid="00363626-e366-42f8-8361-b70c3da73e15" style="Negrita13" positionType="Float" x="0" y="335" width="35" height="20" isRemoveLineWhenBlank="true">
+						<printWhenExpression><![CDATA[$P{ECO}.getAc()==null?false:true]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Left" verticalAlignment="Bottom">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[AC:]]></text>
+				</staticText>
+				<textField isBlankWhenNull="false">
+					<reportElement uuid="9178f8d1-3db0-4ef9-ad80-ab9fdb409e6a" positionType="Float" x="35" y="335" width="65" height="20" isRemoveLineWhenBlank="true">
+						<printWhenExpression><![CDATA[$P{ECO}.getAc()==null?false:true]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Right" verticalAlignment="Bottom"/>
+					<textFieldExpression><![CDATA[$P{ECO}.getAc()+" cm"]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="false">
+					<reportElement uuid="07379265-be8b-40d6-b8cf-0f460a5a2828" positionType="Float" x="100" y="335" width="372" height="20" isRemoveLineWhenBlank="true">
+						<printWhenExpression><![CDATA[$P{ECO}.getAc()==null?false:true]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Left" verticalAlignment="Bottom">
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[" = "+$P{ECO}.getAcSemanas()+" semanas"]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement uuid="62d8189a-e92d-461b-881c-22beec3c5429" style="Negrita13" positionType="Float" x="0" y="355" width="35" height="20" isRemoveLineWhenBlank="true">
+						<printWhenExpression><![CDATA[$P{ECO}.getLf()==null?false:true]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Left" verticalAlignment="Bottom">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[LF:]]></text>
+				</staticText>
+				<textField isBlankWhenNull="false">
+					<reportElement uuid="cba2b6ea-7885-4bff-9b9f-3a7a62a77d4c" positionType="Float" x="35" y="355" width="65" height="20" isRemoveLineWhenBlank="true">
+						<printWhenExpression><![CDATA[$P{ECO}.getLf()==null?false:true]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Right" verticalAlignment="Bottom"/>
+					<textFieldExpression><![CDATA[$P{ECO}.getLf()+" mm"]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="false">
+					<reportElement uuid="f2b1f2b6-c398-45b7-b7d7-d2c7258e719a" positionType="Float" x="100" y="355" width="372" height="20" isRemoveLineWhenBlank="true">
+						<printWhenExpression><![CDATA[$P{ECO}.getLf()==null?false:true]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Left" verticalAlignment="Bottom">
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[" = "+$P{ECO}.getLfSemanas()+" semanas"]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement uuid="5483bf29-fa0c-4ebf-a2be-bd3464621aac" style="Negrita13" positionType="Float" x="0" y="375" width="35" height="22" isRemoveLineWhenBlank="true">
+						<printWhenExpression><![CDATA[$P{ECO}.getLa()==null?false:true]]></printWhenExpression>
+					</reportElement>
+					<textElement verticalAlignment="Top">
+						<font isBold="true"/>
+						<paragraph spacingBefore="5"/>
+					</textElement>
+					<text><![CDATA[LA:]]></text>
+				</staticText>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="false">
+					<reportElement uuid="702c5e58-ec3a-4d36-8d6c-7e6575232572" positionType="Float" x="0" y="375" width="472" height="22" isRemoveLineWhenBlank="true">
+						<printWhenExpression><![CDATA[$P{ECO}.getLa()==null?false:true]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Left" verticalAlignment="Top">
+						<font isBold="false"/>
+						<paragraph firstLineIndent="40" spacingBefore="7"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{ECO}.getLa()]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement uuid="256e026e-b342-43ac-a9c4-0dacf3afd020" style="Negrita13" positionType="Float" x="0" y="397" width="70" height="22" isRemoveLineWhenBlank="true">
+						<printWhenExpression><![CDATA[$P{ECO}.getPlacenta()== null?false:true]]></printWhenExpression>
+					</reportElement>
+					<textElement verticalAlignment="Top">
+						<font isBold="true"/>
+						<paragraph spacingBefore="5"/>
+					</textElement>
+					<text><![CDATA[Placenta:]]></text>
+				</staticText>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="false">
+					<reportElement uuid="07ad7d9e-5d4f-4ba0-a21c-bd8620c09f23" positionType="Float" x="0" y="397" width="472" height="22" isRemoveLineWhenBlank="true">
+						<printWhenExpression><![CDATA[$P{ECO}.getPlacenta()==null?false:true]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Left" verticalAlignment="Top">
+						<paragraph firstLineIndent="75" spacingBefore="7"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{ECO}.getPlacenta()]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement uuid="64ad7278-16d4-42b3-b84e-cba217dfb6e9" style="Negrita13" positionType="Float" x="0" y="419" width="115" height="22" isRemoveLineWhenBlank="true">
+						<printWhenExpression><![CDATA[$P{ECO}.getEdadGestacional()==null?false:true]]></printWhenExpression>
+					</reportElement>
+					<textElement verticalAlignment="Top">
+						<font isBold="true"/>
+						<paragraph spacingBefore="5"/>
+					</textElement>
+					<text><![CDATA[Edad Gestacional:]]></text>
+				</staticText>
+				<textField isBlankWhenNull="false">
+					<reportElement uuid="eaf365ae-83b9-458f-a260-6f6f5bb1c49b" positionType="Float" x="115" y="419" width="357" height="22" isRemoveLineWhenBlank="true">
+						<printWhenExpression><![CDATA[$P{ECO}.getEdadGestacional()==null?false:true]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Left" verticalAlignment="Top">
+						<paragraph leftIndent="10" spacingBefore="7"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{ECO}.getEdadGestacional() + " +/- " + $P{ECO}.getEdadGestacionalDesvio() + " semana(s)"]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement uuid="18d206ee-2153-4f9d-b9ba-fbbddd3c0b68" style="Negrita13" positionType="Float" x="0" y="463" width="40" height="22" isRemoveLineWhenBlank="true">
+						<printWhenExpression><![CDATA[$P{ECO}.getFpp()==null?false:true]]></printWhenExpression>
+					</reportElement>
+					<textElement verticalAlignment="Top">
+						<font isBold="true"/>
+						<paragraph spacingBefore="5"/>
+					</textElement>
+					<text><![CDATA[FPP:]]></text>
+				</staticText>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="false">
+					<reportElement uuid="5b8b3401-c1e5-4dd0-8384-7bae692c574c" positionType="Float" x="40" y="463" width="432" height="22" isRemoveLineWhenBlank="true">
+						<printWhenExpression><![CDATA[$P{ECO}.getFpp()==null?false:true]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Left" verticalAlignment="Top">
+						<paragraph leftIndent="10" spacingBefore="7"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{FORMATO_DIA}.format($P{ECO}.getFpp()) + " de " + $P{FORMATO_MES}.format($P{ECO}.getFpp()) + " del " + $P{FORMATO_ANIO}.format($P{ECO}.getFpp())]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement uuid="8604074a-cf56-4372-afb9-666b1e7622f8" style="Negrita13" positionType="Float" x="0" y="485" width="100" height="22" isRemoveLineWhenBlank="true">
+						<printWhenExpression><![CDATA[$P{ECO}.getObservaciones()==null?false:true]]></printWhenExpression>
+					</reportElement>
+					<textElement verticalAlignment="Top">
+						<font isBold="true"/>
+						<paragraph spacingBefore="5"/>
+					</textElement>
+					<text><![CDATA[Observaciones:]]></text>
+				</staticText>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="false">
+					<reportElement uuid="7ba64eb8-154b-4bb8-8cd3-8507e1b3decc" positionType="Float" x="0" y="485" width="472" height="22" isRemoveLineWhenBlank="true">
+						<printWhenExpression><![CDATA[$P{ECO}.getObservaciones()==null?false:true]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Left" verticalAlignment="Top">
+						<paragraph firstLineIndent="110" spacingBefore="7"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{ECO}.getObservaciones()]]></textFieldExpression>
+				</textField>
+				<frame>
+					<reportElement uuid="4f9b87e8-73bc-4c11-85c0-f547eb24d624" positionType="Float" x="0" y="507" width="472" height="155"/>
+					<box topPadding="15"/>
+					<staticText>
+						<reportElement uuid="a47ffc20-2563-4c34-b0c8-4933a8708e11" positionType="Float" x="0" y="0" width="472" height="90"/>
+						<textElement textAlignment="Left" verticalAlignment="Top">
+							<font size="14"/>
+						</textElement>
+						<text><![CDATA[Atentamente]]></text>
+					</staticText>
+					<staticText>
+						<reportElement uuid="c29cae2a-6bc9-48a6-ab48-fce9b3bce3e7" positionType="Float" x="0" y="90" width="472" height="20"/>
+						<textElement textAlignment="Left" verticalAlignment="Top">
+							<font size="14"/>
+						</textElement>
+						<text><![CDATA[Dr. Hipólito Lozada]]></text>
+					</staticText>
+					<staticText>
+						<reportElement uuid="c0e2a137-e482-40d9-93c9-b74319baf540" positionType="Float" x="0" y="110" width="472" height="30"/>
+						<textElement textAlignment="Left" verticalAlignment="Top">
+							<font size="10"/>
+						</textElement>
+						<text><![CDATA[Ginecólogo-Obstetra
+Cod: 1709928640]]></text>
+					</staticText>
+				</frame>
+				<staticText>
+					<reportElement uuid="a5936fc8-8ec7-4798-ae2f-2b7b74638758" style="Negrita13" positionType="Float" x="0" y="441" width="40" height="22" isRemoveLineWhenBlank="true">
+						<printWhenExpression><![CDATA[$P{ECO}.getPeso()==null?false:true]]></printWhenExpression>
+					</reportElement>
+					<textElement verticalAlignment="Top">
+						<font isBold="true"/>
+						<paragraph spacingBefore="5"/>
+					</textElement>
+					<text><![CDATA[Peso:]]></text>
+				</staticText>
+				<textField isBlankWhenNull="false">
+					<reportElement uuid="d68a9ffb-f1af-42df-aaf5-106ff3f78d18" positionType="Float" x="40" y="441" width="432" height="22" isRemoveLineWhenBlank="true">
+						<printWhenExpression><![CDATA[$P{ECO}.getPeso()==null?false:true]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Left" verticalAlignment="Top">
+						<paragraph leftIndent="10" spacingBefore="7"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{ECO}.getPeso() + " gramos"]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+	</group>
+</jasperReport>
